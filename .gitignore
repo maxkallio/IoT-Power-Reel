@@ -1,0 +1,43 @@
+# Dependencies
+**/node_modules/
+
+# Production
+**/build/
+
+# IDE Files
+**/embedded/.idea/
+**/.idea/
+
+# Generated files
+**/.docusaurus/
+**/.cache-loader/
+
+# Misc
+**/.DS_Store
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/.pio
+
+# Ignore NPM lock file
+**/package-lock.json
+
+# Ignore mariadb
+docker/config/mariadb/
+
+# Ignore phpmyadmin sessions
+docker/config/phpmyadmin/sessions/
+
+# Ignore PIO files
+embedded/.pio
+embedded/.vscode/.browse.c_cpp.db*
+embedded/.vscode/c_cpp_properties.json
+embedded/.vscode/launch.json
+embedded/.vscode/ipch
+embedded/.vscode/extensions.json
+embedded/.gitignore

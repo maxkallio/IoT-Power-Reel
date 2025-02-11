@@ -1,0 +1,42 @@
+<div>
+    <div class="mainContentOfPage">
+        <div>
+            <h1>Locker Dashboard</h1>
+            <button class="manuallyResetLockerButton" onclick="resetLockerRack()">Reconfigure Entire Station</button>
+            <div id="locker_table_div"></div>
+        </div>
+    </div>
+    <div id="popupModal" class="modal">
+        <div class="modalContent">
+            <span class="closePopupButton">&times;</span>
+            <h2 class="popupText">Please fill out this form</h2>
+            <form id="popupForm">
+                <label class="popupText">Admin ID:</label>
+                <input type="text" id="adminId" name="adminId">
+
+                <label class="popupText">Admin Password:</label>
+                <input type="password" id="adminPassword" name="adminPassword">
+
+                <label class="popupText">Locker ID:</label>
+                <input type="text" id="lockerId" name="lockerId" readonly>
+
+                <label class="popupText">Status:</label>
+                <select id="dropdown" name="dropdown">
+                    <option value="Free">Free</option>
+                    <option value="Taken">Taken</option>
+                </select>
+
+                <!-- Hidden input that will appear only when Taken is selected from the above dropdown-->
+                <div id="cableIdInput">
+                    <label class="popupText">Cable ID:</label>
+                    <input type="popupText" id="cableId" name="cableId">
+                </div>
+
+                <label class="popupText">Locker Number:</label>
+                <input type="text" id="lockerNumber" name="lockerNumber">
+
+                <button type="submit" class="popupButton" onclick="handlePopupForm(event)">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

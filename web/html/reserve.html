@@ -1,0 +1,20 @@
+<div>
+    <div class="mainContentOfPage">
+        <div>
+          <h1>Available Cables</h1>
+          <div id="reservation_table_div"></div>
+      </div>
+    </div>
+    <div id="reservationModal" class="modal">
+        <div class="modalContent">
+            <span class="closePopupButton">&times;</span>
+            <h2 class="popupText">Please fill out this form</h2>
+            <form id="reservationForm">
+                <label class="popupText">Name:</label>
+                <input type="text" id="reservationName" name="reservationName">
+
+                <button type="submit" class="popupButton" onclick="handleReserveFrom(event)">Reserve</button>
+            </form>
+        </div>
+    </div>
+</div>

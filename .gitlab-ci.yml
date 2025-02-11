@@ -1,0 +1,65 @@
+workflow:
+  rules:
+    #- if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    #- if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_TITLE =~ /Merge branch.*/
+      
+stages:
+  - build-docs
+  - build-server
+  - build-pages
+  - build-embedded
+
+build-docs:
+  stage: build-docs
+  image: node:18
+  tags:
+    - hva
+  script:
+    - cd iot-power-docs
+    - yarn install
+    - yarn build
+  artifacts:
+    paths:
+      - iot-power-docs/build  # Specify the correct path to the 'build' directory
+
+build-server:
+  stage: build-server
+  image: tmaier/docker-compose:latest
+  services: # Using docker in docker
+    - docker:24.0.5-dind
+  tags:
+    - hva
+  before_script:
+    - docker info
+    - docker-compose --version
+  script: 
+    - docker-compose up -d
+  after_script: docker-compose down
+
+pages:
+  stage: build-pages
+  tags:
+    - hva
+  dependencies:
+    - build-docs
+  script:
+    - mv iot-power-docs/build public
+  artifacts:
+    paths:
+      - public
+
+embedded:
+  stage: build-embedded
+  image: python:3.11
+  cache:
+    paths:
+      - ~/.cache/pip
+      - ~/.platformio/.cache
+  tags:
+    - hva
+  before_script: pip install -U platformio
+  script: 
+  - cd embedded
+  - pio run --environment d1_mini_lite_online
+  - pio run --environment d1_mini_lite_offline
+  # - pio run --environment esp32doit-devkit-v1
